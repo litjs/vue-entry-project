@@ -1,12 +1,17 @@
 import { debug, production } from './helpers/getArg'
 
+var src = './src'
+
 export default {
-  src: './src',
+  vueEntryConfig:{
+    src:src,
+    vueLibBuildIn:true,
+    components: './src/components',
+    pages: './src/pages',
+    langs:["zh_CN"]
+  },
+  src: src,
   dest: './dist',
-  vueLibBuildIn:true,
-  app: '/app',
-  components: './src/components',
-  pages: './src/pages',
 
   assets: {
     images: 'statics/images',
@@ -21,6 +26,6 @@ export default {
   NODE_ENV: production ? 'production' : 'developer',
 
   server: {
-    port: 8081,
+    port: 8082,
   },
 }

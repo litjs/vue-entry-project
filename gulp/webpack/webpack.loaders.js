@@ -1,29 +1,29 @@
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from '../config'
 import path from 'path'
-import {getEntryFilePath} from 'vue-entry/dist/bootstrap/utils'
+import {getEntryFilePath,getAppRootPath} from 'vue-entry/dist/bootstrap/utils'
+var vueEntryConfig = config.vueEntryConfig
 
 var loaders = {}
 
 loaders.js = {
   test: /\.js$/i,
-  include: [path.resolve(config.src), path.resolve('./node_modules/bh-vue'), path.resolve('./node_modules/wec-vue')],
-  loader: 'babel',
+  include: [path.resolve(config.src)],
+  loader: 'babel'
 }
 
-loaders.js1 = {
+loaders.tempJs = {
   test: /\.js$/i,
-  include: getEntryFilePath(),
-  exclude: [/\/node_modules\//, /\/bower_components\//],
-  loader: 'babel',
+  include: [getEntryFilePath(vueEntryConfig)],
+  loader: 'babel'
 }
 
-loaders.configjson = {
+loaders.configJson = {
   test: /config\.json$/i,
   exclude: [/\/components\//],
   loader: 'file',
   query: {
-    context: path.resolve(config.pages),
+    context: getAppRootPath(vueEntryConfig),
     name: '[path][name].[ext]'
   }
 }
@@ -33,7 +33,7 @@ loaders.indexhtml = {
   exclude: [/\/components\//],
   loader: 'file',
   query: {
-    context: path.resolve(config.pages),
+    context: getAppRootPath(vueEntryConfig),
     name: '[path][name].[ext]'
   }
 };
@@ -43,37 +43,15 @@ loaders.i18n = {
   exclude: [/\/components\//],
   loader: 'file',
   query: {
-    context: getEntryFilePath(),
+    context: getEntryFilePath(vueEntryConfig),
     name: '[path][name].[ext]'
   }
 };
 
-loaders.config = {
-  test: /config\.json$/i,
-  exclude: [/\/pages\//, /\/components\//],
-  loader: 'file?name=[name].json'
-}
-
-loaders.html = {
-  test: /\.html$/i,
-  exclude: [/index\.html/],
-  loader: 'html',
-}
-
 loaders.vue = {
   test: /\.vue$/i,
-  include: [path.resolve(config.src), path.resolve('./node_modules/bh-vue'), path.resolve('./node_modules/wec-vue')],
+  include: [path.resolve(config.src)],
   loader: 'vue',
-}
-
-loaders.promise = {
-  test: /\.js$/i,
-  include: [/pages/],
-  exclude: loaders.js.exclude,
-  loaders: [
-    'promise?global,[name].promise',
-    'babel',
-  ]
 }
 
 loaders.sassUsable = {
@@ -145,13 +123,12 @@ loaders.svg = {
 }
 
 var usedLoaders = [
-  loaders.configjson,
+  loaders.configJson,
   loaders.indexhtml,
   loaders.i18n,
   loaders.vue,
   loaders.js,
-  loaders.js1,
-  loaders.html,
+  loaders.tempJs,
   loaders.sass,
   loaders.sassUsable,
   loaders.less,

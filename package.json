@@ -47,8 +47,11 @@
     "script-loader": "^0.7.0",
     "string-replace-webpack-plugin": "0.0.3",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "vinyl-named": "^1.1.0",
-    "vue-entry": "0.0.4",
+    "vue-entry": "0.0.10",
+    "vue-loader": "^11.0.0",
+    "vue-template-compiler": "^2.1.10",
     "webpack-stream": "2.1.0"
   },
   "devDependencies": {
