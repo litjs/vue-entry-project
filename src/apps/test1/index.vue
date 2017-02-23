@@ -1,16 +1,16 @@
 <template>
     <div>helloworld! <span>{{$t('index.name')}}</span></div>
 </template>
-<script>
+<script type="text/ecmascript-6">
     export default {
-        computed:{
-            state(){
-                return this.$store.index
-            }
+        computed: {
+            ...Vuex.mapState({
+                index: state => state.index
+            })
         },
         mounted(){
             console.log(this.$root.config.theme)
-            console.log(this.state.title)
+            console.log(this.index.title)
         }
     }
 </script>

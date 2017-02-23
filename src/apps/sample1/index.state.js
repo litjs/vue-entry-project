@@ -1,5 +1,3 @@
-
-
 export const state = {
   test: {
     a: {
@@ -8,3 +6,18 @@ export const state = {
     k:'dd'
   }
 }
+
+export const mutations = {
+  testMutation (state, payload) {
+    console.log(state)
+    state.test = payload.top
+  }
+}
+
+export const actions = {
+  testAction ({commit}, top) {
+    console.log('222')
+    commit({type: 'testMutation', top: top})
+  }
+}
+
